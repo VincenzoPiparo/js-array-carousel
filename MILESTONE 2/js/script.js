@@ -18,7 +18,7 @@ const title = [
     'Gran Bretagna',
     'Germania',
     'Paradise'
-]
+];
 
 const text = [
     'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Et temporibus voluptatum suscipit tempore aliquid deleniti aut veniam inventore eligendi ex ad ullam, cumque provident totam omnis, magnam dolores dolorum corporis.',
@@ -26,4 +26,34 @@ const text = [
     'Lorem ipsum, dolor sit amet consectetur adipisicing elit.',
     'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Et temporibus voluptatum suscipit tempore aliquid deleniti aut veniam inventore eligendi ex ad ullam,',
     'Et temporibus voluptatum suscipit tempore aliquid deleniti aut veniam inventore eligendi ex ad ullam,',
-]
+];
+
+const containerImage = document.querySelector('.container_image')
+const thumbs = document.querySelector('.cont_img')
+for( let i = 0; i < items.length; i++) {
+    const thisItems = items[i];
+    const thisTitle = title[i];
+    const thisText = text[i];
+
+    const newImage = `
+             <div class="single_img active">
+                <img src="${thisItems}" alt="${i}">
+                <div class="single_img_text">
+                    <h3>${thisTitle}</h3>
+                    <p>${thisText}</p>
+                </div>
+            </div>
+
+    `
+    containerImage.innerHTML += newImage;
+
+
+    const newThumbs = `
+         <div class="single_thumbs active">
+             <img src="${thisItems}" alt="${i}">
+         </div> 
+    `
+    thumbs.innerHTML +=  newThumbs;
+}
+
+
