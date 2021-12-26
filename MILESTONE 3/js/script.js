@@ -27,18 +27,18 @@ const text = [
     'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Et temporibus voluptatum suscipit tempore aliquid deleniti aut veniam inventore eligendi ex ad ullam,',
     'Et temporibus voluptatum suscipit tempore aliquid deleniti aut veniam inventore eligendi ex ad ullam,',
 ];
-// METTERE IMMAGGINI E THUMBS
+// Seleziono i contenitori ai quali andrò ad appendere i div conteneti le immagini grandi e le miniature
 const imgContainer = document.querySelector(`.img_container`)
 const thumbsContainer = document.querySelector(`.thumbs_img`)
-console.log(thumbsContainer)
 
+// Con il ciclo for vado a selezionare gli elementi contenuti nelle array li assegno a delle varianti che andranno a popolare i div che dovrò appendere
 for (let i = 0; i < items.length; i++) {
     const thisImg = items[i];
     const thisTitle = title[i];
     const thisText = text[i];
 
     const newImage = `
-        <div class="single_img active">
+        <div class="single_img">
             <img src="${thisImg}" alt="${i}">
             <div class="single_img_text">
                 <h3>${thisTitle}</h3>
@@ -50,10 +50,45 @@ for (let i = 0; i < items.length; i++) {
     imgContainer.innerHTML += newImage;
 
     const newImageThumbs = `
-        <div class="single_thumbs_img active">
+        <div class="single_thumbs_img">
             <img src="${thisImg}" alt="${i}">
         </div>
     `;
 
     thumbsContainer.innerHTML += newImageThumbs;
 }
+ 
+
+// Seleziono l'immagine alla quale assegnare la classe active
+let selectImage = 0;
+const bigImgs = document.getElementsByClassName('single_img');
+const thumbsImgs = document.getElementsByClassName('single_thumbs_img');
+bigImgs[selectImage].classList.add('active');
+thumbsImgs[selectImage].classList.add('activegrey');
+
+// Quando si clicca sulle frecce che appaioni nel thumbs vengono rimosse le classi "active" alle immagini selezionate
+const upArrow = document.querySelector(`.top`);
+upArrow.addEventListener(`click`, function(){
+    bigImgs[selectImage].classList.remove(`active`)
+    thumbsImgs[selectImage].classList.remove(`activegrey`)
+    if ( selectImage > 0 ) {
+        selectImage--;
+    } else {
+        selectImage = items.length - 1;
+    }
+    bigImgs[selectImage].classList.add('active');
+    thumbsImgs[selectImage].classList.add('activegrey');
+})
+const dwnArrow = document.querySelector(`.dwn`);
+dwnArrow.addEventListener(`click`, function(){
+    bigImgs[selectImage].classList.remove(`active`)
+    thumbsImgs[selectImage].classList.remove(`activegrey`)
+    if( selectImage < items.length - 1 ) {
+        selectImage++;
+        console.log(selectImage)
+    } else {
+        selectImage = 0;
+    }
+    bigImgs[selectImage].classList.add('active');
+    thumbsImgs[selectImage].classList.add('activegrey');
+})
